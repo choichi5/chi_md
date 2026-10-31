@@ -14,6 +14,7 @@ AI 에이전트와 일할 때 **문제 정의 → 단계별 구현·검증 → �
 | `VERIFY.md` | 검증 기록 + 알려진 한계·위험 |
 | `HANDOFF.md` | 인수인계 문서 틀 |
 | `START.md` | 시작 10분 루틴과 스킬 사용 시점 |
+| `TOOLS.md` | 자주 쓰는 bash 명령 + 사내 툴 만드는 방식(CLI / HTML 보고서 / 단일 HTML / 로컬 서버) 비교 |
 | `skills/*/SKILL.md` | Agent Skills 7개 (아래) |
 
 ## 스킬
