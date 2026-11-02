@@ -10,11 +10,12 @@ description: 과제 시작 직후 한 번 실행. 저장소와 과제 설명을 
 ## 절차
 1. 현재 상태를 파악한다: `ls -la`, `git status`, `git log --oneline | head`, 루트 README와 과제 설명 전체.
    - git 저장소가 아니면 `git init`. `.gitignore`가 없으면 GIT.md의 기본 목록으로 만든다.
-2. 아래 4개 파일이 없으면 만든다. 내용은 빈 틀만 둔다(사용자가 채운다).
+2. 아래 파일이 없으면 만든다. 내용은 빈 틀만 둔다(사용자가 채운다).
    - `AGENTS.md`: 목표는 PROBLEM.md를 따른다 / 한 번에 한 단계만 한다 / 모르면 TODO(확인필요) / 결정은 DECISIONS.md에 / 기능마다 정상 1개와 실패 2개 테스트 / 요구보다 큰 설계 금지 / 원본 데이터 수정 금지
    - `PROBLEM.md`: 배경, 문제(한 문장), 성공 기준(숫자), 범위(Must/Should/Won't), 제약, 가정(확인 필요), 실무자 확인 기록
    - `DECISIONS.md`: `시각 | 결정 | 근거 | 버린 대안` 표
    - `VERIFY.md`: `대상 | 확인 내용 | 방법 | 결과 | 후속` 표 + "알려진 한계/위험"
+   - `COMPONENTS.md`: 구성표 틀 / `CHALLENGES.md`: 챌린지 기록 틀
 3. 제공 데이터가 있으면 `data-check` 스킬 절차로 점검한다.
 4. `git-commit` 스킬 절차로 커밋한다: `chore: 작업 지침·문서 틀 세팅`
 
