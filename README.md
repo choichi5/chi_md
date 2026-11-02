@@ -3,21 +3,37 @@
 AI 에이전트와 일할 때 **문제 정의 → 단계별 구현·검증 → 단계마다 자동 커밋 → 인수인계** 흐름을 강제하는 마크다운 지침 + Agent Skills 모음.
 코드는 없고 `.md` 파일만 있다.
 
-## 구성
+## 폴더 구조
+```
+chi_md/
+├── harness/     에이전트가 따르는 규칙 → 작업 저장소 루트에 복사
+├── templates/   작업하며 채우는 문서 틀 → 작업 저장소 루트에 복사
+├── skills/      Agent Skills 9개 → .agents/skills/, .claude/skills/에 복사
+└── guides/      사람이 읽는 참고 자료 (복사 안 함)
+```
+
+### harness/ — 에이전트 규칙
 | 파일 | 용도 |
 |---|---|
 | `AGENTS.md` | 에이전트 공통 작업 지침 (Codex가 자동으로 읽음) |
 | `CLAUDE.md` | Claude Code용 추가 규칙 (AGENTS.md를 따르게 함) |
 | `GIT.md` | **git 관리 하네스**: 언제 커밋하나, 메시지 형식, 커밋 금지 대상, 이력 보호 |
+
+### templates/ — 작업 문서 틀
+| 파일 | 용도 |
+|---|---|
 | `PROBLEM.md` | 문제 정의서: 배경, 한 문장 문제, 숫자 성공 기준, 범위, 제약, 가정 |
 | `DECISIONS.md` | 결정 로그: 결정 / 근거 / 버린 대안, AI 오류 수정 기록 |
 | `VERIFY.md` | 검증 기록 + 알려진 한계·위험 |
-| `HANDOFF.md` | 인수인계 문서 틀 |
 | `COMPONENTS.md` | **구성과 책임**: 구성별 책임 한 문장, 입력→출력, 따로 둔 이유, 깨지면, 구조 결정자 |
 | `CHALLENGES.md` | **문제 인식 → AI 지시(원문) → 검증 → 극복** 기록 |
+| `HANDOFF.md` | 인수인계 문서 틀 |
+
+### guides/ — 사람용 참고
+| 파일 | 용도 |
+|---|---|
 | `START.md` | 시작 10분 루틴과 스킬 사용 시점 |
 | `TOOLS.md` | 자주 쓰는 bash 명령 + 사내 툴 만드는 방식(CLI / HTML 보고서 / 단일 HTML / 로컬 서버) 비교 |
-| `skills/*/SKILL.md` | Agent Skills 9개 (아래) |
 
 ## 스킬
 | 스킬 | 언제 | 하는 일 |
@@ -40,12 +56,13 @@ git clone --depth 1 https://github.com/choichi5/chi_md.git /tmp/chi_md
 mkdir -p .agents/skills .claude/skills
 cp -r /tmp/chi_md/skills/* .agents/skills/
 cp -r /tmp/chi_md/skills/* .claude/skills/
-for f in AGENTS.md CLAUDE.md GIT.md PROBLEM.md DECISIONS.md VERIFY.md HANDOFF.md COMPONENTS.md CHALLENGES.md; do [ -e "$f" ] || cp "/tmp/chi_md/$f" .; done
-ls .agents/skills
+for f in /tmp/chi_md/harness/*.md /tmp/chi_md/templates/*.md; do [ -e "$(basename "$f")" ] || cp "$f" .; done
+ls .agents/skills; ls *.md
 ```
 - Codex: 저장소의 `.agents/skills/`(또는 사용자 전역 `~/.agents/skills/`)를 읽는다.
 - Claude Code: `.claude/skills/`를 읽는다.
-- 이미 `AGENTS.md`가 있으면 덮어쓰지 않는다. 그때는 `/tmp/chi_md/AGENTS.md`의 "git 관리" 절만 기존 파일 끝에 붙인다.
+- harness와 templates의 파일은 **작업 저장소 루트**에 평평하게 복사된다(문서끼리 루트 경로로 서로를 참조하기 때문).
+- 이미 `AGENTS.md`가 있으면 덮어쓰지 않는다. 그때는 `/tmp/chi_md/harness/AGENTS.md`의 "설명할 수 있게 기록하기"와 "git 관리" 절만 기존 파일 끝에 붙인다.
 
 ## 커밋 메시지 예 (GIT.md 형식)
 ```
