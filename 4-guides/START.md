@@ -9,19 +9,18 @@
 3. 하네스를 설치한다 (README의 "설치" 명령 복사 → 붙여넣기). 그다음 `$kickoff`(Codex) 또는 `/kickoff`(Claude Code)를 호출한다.
    설치가 안 되면 AI에게 "아래 내용으로 AGENTS.md를 만들어라"라고 지시해 직접 만든다:
    `AGENTS.md`, `GIT.md`, `PROBLEM.md`, `DECISIONS.md`, `VERIFY.md`
-   → `chore: 작업 지침·문서 틀 세팅` 커밋 (이후 커밋은 AI가 `git-commit` 절차로 단계마다 알아서 한다)
+   → `chore: 작업 지침·문서 틀 세팅` 커밋 (이후 커밋은 AI가 `step-verify` 절차로 단계마다 알아서 한다)
 
-## 스킬 사용 시점
-| 언제 | 스킬 |
-|---|---|
-| 시작 직후 | `kickoff` (안에서 `data-check`까지 실행) |
-| 인터뷰 중간, 끝 | `problem-brief` → 남은 질문을 실무자에게 |
-| 기능 하나 끝날 때마다 | `step-verify` |
-| 큰 구현 직후, 90분 무렵 | `scope-check` |
-| 문제 발견·수정·AI 결과 거절 때 (AI가 자동으로) | `challenge-log` |
-| 약 120분, 마감 30분 전 | `explain-prep` (wrap-handoff 안에서도 실행) |
-| 단계가 끝날 때마다 (AI가 자동으로) | `git-commit` |
-| 마감 30분 전 | `wrap-handoff` |
+## 스킬 사용 시점 (6개)
+| 언제 | 스킬 | 하는 일 |
+|---|---|---|
+| 시작 직후 1회 | `kickoff` | 문서 틀 + 데이터 함정 점검 → 현업 질문 목록 |
+| 인터뷰 중간, 끝 | `problem-brief` | PROBLEM.md 채우기 + 남은 질문 |
+| 알고리즘·모델 정할 때 | `choice-compare` | 대안 비교표 → 단순 기준선 → 같은 데이터로 수치 비교 |
+| 기능 하나 끝날 때마다 (AI 자동) | `step-verify` | 검증 → 문서·챌린지 기록 → 커밋 |
+| 큰 구현 직후, 90~120분 | `checkpoint` | 과한 설계 축소 + 설명 준비 빈칸 점검 |
+| 마감 30분 전 | `wrap-handoff` | 문서-코드 대조, HANDOFF, 1인칭 설명 스크립트 |
+
 4. 실무자(현업 담당자) 인터뷰를 시작한다: 사소한 맥락 질문부터 → 최근 에피소드 → 현재 우회책 → 숫자로 된 성공 기준 → 예외·제약.
 5. 합의가 끝나면 PROBLEM.md를 채우고 커밋한 뒤 첫 Codex 지시를 내린다:
    ```
